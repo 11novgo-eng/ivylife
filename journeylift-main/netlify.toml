@@ -1,0 +1,202 @@
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin-v2.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/articles/:slug"
+  to = "/articles/article.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles"
+  to = "/articles/index.html"
+  status = 200
+
+[[headers]]
+  for = "/admin-v2.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/tools/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/articles*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[edge_functions]]
+  function = "og-meta"
+  path = "/articles/:slug"
+
+[functions.claude-proxy]
+  timeout = 26
+
+# City & keyword pages
+[[redirects]]
+  from = "/nantou"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/nantou/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taichung"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taichung/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taipei"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taipei/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/tainan"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/tainan/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taitung"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taitung/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/chiayi"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/chiayi/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/keelung"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/keelung/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/yilan"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/yilan/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/pingtung"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/pingtung/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/newtaipei"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/newtaipei/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/hsinchu"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/hsinchu/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taoyuan"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/taoyuan/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/penghu"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/penghu/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/hualien"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/hualien/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/kinmen"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/kinmen/*"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/kaohsiung"
+  to = "/city.html"
+  status = 200
+
+[[redirects]]
+  from = "/kaohsiung/*"
+  to = "/city.html"
+  status = 200
