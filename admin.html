@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IvyLife &#24460;&#21臺;&#31649;&#29702;</title>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--rose:#c8566a;--rose-light:#f2a5b0;--rose-pale:#fff0f2;--gold:#c99960;--dark:#2d2020;--gray:#a08085;--bg:#f8f4f5;--border:rgba(200,86,106,0.12)}
+body{font-family:'Noto Sans TC',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff0f2,#fde8d8)}
+.login-box{background:white;border-radius:20px;padding:2.5rem;width:340px;box-shadow:0 20px 60px rgba(200,86,106,0.15);text-align:center}
+.login-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:0.5rem}
+.login-logo svg{width:42px;height:42px}
+.login-logo .lt{font-size:1.6rem;font-weight:700}.lt .ivy{color:var(--rose)}.lt .life{color:var(--gold);font-style:italic}
+.login-sub{font-size:0.82rem;color:var(--gray);margin-bottom:1.8rem}
+.login-box input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:0.95rem;outline:none;font-family:inherit;margin-bottom:1rem}
+.login-box input:focus{border-color:var(--rose)}
+.btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--rose),#e07a8a);color:white;border:none;border-radius:10px;font-size:1rem;font-family:inherit;cursor:pointer;font-weight:500}
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.sidebar{background:var(--dark);color:white;padding:1.5rem 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{display:flex;align-items:center;gap:8px;padding:0 1.5rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sidebar-logo svg{width:32px;height:32px}
+.sidebar-logo .lt{font-size:1.2rem;font-weight:700}.sidebar-logo .lt .ivy{color:var(--rose-light)}.sidebar-logo .lt .life{color:var(--gold);font-style:italic}
+.sidebar-sub{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:0.2rem}
+.sidebar-menu{padding:1rem 0;list-style:none}
+.sidebar-menu li a,.sidebar-menu li button{display:flex;align-items:center;gap:0.7rem;width:100%;padding:0.7rem 1.5rem;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.88rem;background:none;border:none;cursor:pointer;font-family:inherit;text-align:left;transition:all 0.2s}
+.sidebar-menu li a:hover,.sidebar-menu li button:hover,.sidebar-menu li.active a,.sidebar-menu li.active button{color:white;background:rgba(200,86,106,0.15)}
+.sidebar-menu li.active a,.sidebar-menu li.active button{border-left:3px solid var(--rose);padding-left:calc(1.5rem - 3px)}
+.main{background:var(--bg);overflow-y:auto}
+.topbar{background:white;border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar h1{font-size:1.1rem;font-weight:600}
+.topbar-actions{display:flex;gap:0.8rem}
+.btn{padding:8px 18px;border-radius:8px;font-size:0.85rem;font-family:inherit;cursor:pointer;border:none;transition:all 0.2s;font-weight:500}
+.btn-outline{background:white;color:var(--rose);border:1.5px solid var(--rose-light)}
+.btn-outline:hover{background:var(--rose-pale)}
+.btn-rose{background:linear-gradient(135deg,var(--rose),#e07a8a);color:white}
+.btn-rose:hover{opacity:0.9}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#e0b070);color:white}
+.btn-sm{padding:5px 12px;font-size:0.78rem}
+.content{padding:2rem}
+.panel{background:white;border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:1.5rem}
+.panel-hdr{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.panel-hdr h2{font-size:0.95rem;font-weight:600}
+.panel-body{padding:1.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.8rem;font-weight:500;color:var(--gray)}
+.form-group input,.form-group select,.form-group textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:0.88rem;outline:none;font-family:inherit;color:var(--dark);background:white;transition:border-color 0.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--rose)}
+.form-group textarea{resize:vertical;min-height:80px}
+#quillEditor{min-height:280px;font-size:0.92rem}
+.ql-toolbar.ql-snow{border-color:var(--border)!important;border-radius:8px 8px 0 0}
+.ql-container.ql-snow{border-color:var(--border)!important;border-radius:0 0 8px 8px;font-family:inherit}
+.kw-input-row{display:flex;gap:0.5rem;align-items:center}
+.kw-input-row input{flex:1}
+.kw-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem}
+.kw-chip{background:var(--rose-pale);color:var(--rose);padding:4px 12px;border-radius:50px;font-size:0.78rem;display:flex;align-items:center;gap:6px}
+.kw-chip button{background:none;border:none;color:var(--rose);cursor:pointer;font-size:0.9rem;padding:0;line-height:1}
+.cover-preview{width:100%;aspect-ratio:16/9;background:var(--rose-pale);border-radius:8px;overflow:hidden;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:0.85rem}
+.cover-preview img{width:100%;height:100%;object-fit:cover}
+.cover-actions{display:flex;gap:0.5rem;flex-wrap:wrap}
+.art-list-item{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--border);transition:background 0.15s}
+.art-list-item:last-child{border-bottom:none}
+.art-list-item:hover{background:var(--rose-pale)}
+.art-info{flex:1}
+.art-info .at{font-size:0.88rem;font-weight:600;margin-bottom:0.2rem}
+.art-info .am{font-size:0.75rem;color:var(--gray)}
+.art-actions{display:flex;gap:0.5rem}
+.badge{padding:2px 10px;border-radius:50px;font-size:0.72rem;font-weight:500}
+.badge-pub{background:#d1fae5;color:#065f46}
+.badge-draft{background:#fef3c7;color:#92400e}
+.toggle{position:relative;display:inline-block;width:42px;height:24px}
+.toggle input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:12px;transition:.3s}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s}
+input:checked+.slider{background:var(--rose)}
+input:checked+.slider:before{transform:translateX(18px)}
+.empty-state{text-align:center;padding:3rem;color:var(--gray)}
+.ai-prompt-row{display:flex;gap:0.8rem;align-items:flex-end}
+.ai-prompt-row .form-group{flex:1}
+.toast{position:fixed;bottom:2rem;right:2rem;background:#1a1a1a;color:white;padding:12px 20px;border-radius:10px;font-size:0.85rem;z-index:1000;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{border-left:3px solid #10b981}
+.toast.error{border-left:3px solid #ef4444}
+.section-title{font-size:0.78rem;color:var(--rose);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.8rem}
+@media(max-width:768px){.admin-layout{grid-template-columns:1fr}.sidebar{display:none}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div id="loginPage" class="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="18" fill="#fff0f2" stroke="#c8566a" stroke-width="1.2"/>
+        <path d="M19 32C19 32 9 25 9 17C9 12 13.5 8 19 8C24.5 8 29 12 29 17C29 25 19 32 19 32Z" fill="#f2a5b0" opacity="0.5"/>
+        <path d="M19 7C19 7 12 12.5 12 19C12 22.5 14.8 26.5 19 28C23.2 26.5 26 22.5 26 19C26 12.5 19 7 19 7Z" fill="#c8566a" opacity="0.85"/>
+        <ellipse cx="16.5" cy="17.5" rx="4" ry="5.5" transform="rotate(-20 16.5 17.5)" fill="white" opacity="0.55"/>
+        <path d="M19 28V33" stroke="#c99960" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <div class="lt"><span class="ivy">Ivy</span><span class="life">Life</span></div>
+    </div>
+    <div class="login-sub">&#24460;&#21010;&#31649;&#29702;&#31995;&#32113;</div>
+    <input type="password" id="pwInput" placeholder="&#35831;&#36755;&#20837;&#31649;&#29702;&#21592;&#23494;&#30721;" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-primary" onclick="doLogin()">&#30331;&#20837;</button>
+  </div>
+</div>
+
+<!-- Admin Page -->
+<div id="adminPage" class="admin-layout" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="18" fill="rgba(200,86,106,0.3)" stroke="#f2a5b0" stroke-width="1

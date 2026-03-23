@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ivylife.com.tw/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ivylife.com.tw/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://ivylife.com.tw/category.html?cat=tastyfood</loc><priority>0.8</priority></url>
+  <url><loc>https://ivylife.com.tw/category.html?cat=hotel</loc><priority>0.8</priority></url>
+  <url><loc>https://ivylife.com.tw/category.html?cat=beauty</loc><priority>0.8</priority></url>
+  <url><loc>https://ivylife.com.tw/category.html?cat=renovation</loc><priority>0.8</priority></url>
+  <url><loc>https://ivylife.com.tw/category.html?cat=furniture</loc><priority>0.8</priority></url>
+</urlset>
